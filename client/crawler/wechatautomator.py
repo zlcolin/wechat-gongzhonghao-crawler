@@ -63,7 +63,7 @@ class WechatAutomator:
             wechat_id = p.element_info.name
             self.click_center(btn)
         except:
-            pass
+            wechat_id = None
 
         return wechat_id
 

@@ -66,6 +66,8 @@ def main(parser):
     crawl_interval = int(parser.get('basic', 'crawl_interval', fallback=1))
     counter_interval_seconds = int(parser.get('basic', 'counter_interval_seconds', fallback=48*3600))
 
+    no_item_retry = int(parser.get('basic', 'no_item_retry', fallback=3))
+
     crawl_pages = int(parser.get('basic', 'crawl_pages', fallback=3))
     max_crawl_pages = int(parser.get('basic', 'max_crawl_pages', fallback=6))
 
@@ -100,6 +102,7 @@ def main(parser):
     print("debug_ocr: {}".format(debug_ocr))
     print("find_window_timeout: {}".format(find_window_timeout))
     print("pubtime_regex: {}".format(pubtime_regex))
+    print("no_item_retry: {}".format(no_item_retry))
 
     cwd = os.getcwd()
     print("current directory {}".format(cwd))
@@ -121,6 +124,7 @@ def main(parser):
     debug_info["debug_ocr"] = debug_ocr
     debug_info["find_window_timeout"] = find_window_timeout
     debug_info["pubtime_regex"] = pubtime_regex
+    debug_info["no_item_retry"] = no_item_retry
 
     automator = WechatAutomator()
     try:
@@ -244,13 +248,15 @@ def main(parser):
                                                         states=states, max_pages=curr_max_pages,
                                                         detail=detail, latest_date=curr_latest_date,
                                                         crawl_counter=crawl_read_count,
-                                                        debug_ocr=debug_ocr)
+                                                        debug_ocr=debug_ocr,
+                                                        no_item_retry=no_item_retry)
                 else:
                     result = automator.crawl_dingyuehao(line, articles,
                                                     states=states, max_pages=curr_max_pages,
                                                     detail=detail, latest_date=curr_latest_date,
                                                     crawl_counter=crawl_read_count, pubtime_regex=pubtime_regex,
-                                                    debug_ocr=debug_ocr)
+                                                    debug_ocr=debug_ocr,
+                                                    no_item_retry=no_item_retry)
                 s = "抓取 {} 成功: {}".format(line, result)
                 add_to_detail(s, detail)
                 print(s)
