@@ -225,7 +225,8 @@ switch_gongzhonghao = 北京动物园
     * v1.1新增，默认为False。如果需要抓取阅读数，则需要设置为True
 * counter_interval_seconds
     * v1.1新增，默认为172800(两天)。表示当前距离文章的发布时间超过它(两天)才抓取阅读数
-
+* no_item_retry
+    * v1.3.4新增，默认3。列表页翻页失败最多重试次数
 
 #### 配置公众号
 为了告诉爬虫抓取哪些公众号，需要在gongzhonghao.txt里配置要抓取的公众号名(注意是名字而不是id)。 比如：
